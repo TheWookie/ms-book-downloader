@@ -7,4 +7,4 @@ else
 	echo "Virtual env already created"
 fi
 ./venv/bin/pip install requests
-./venv/bin/pip install landslide
+./venv/bin/pip install beautifulsoup4

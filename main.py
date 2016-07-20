@@ -44,5 +44,6 @@ if __name__ == '__main__':
 					filename_url_map[redir_filename] = redir_url
 					print('Collecting:', redir_filename)
 	makedirs(download_directory, exist_ok=True)
-	for file, url in filename_url_map:
+	for file in filename_url_map:
+		url = filename_url_map[file]
 		__download_file__(url, path.join(download_directory, file))

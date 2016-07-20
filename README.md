@@ -1,3 +1,3 @@
-Downloads books from https://blogs.msdn.microsoft.com/mssmallbiz/2016/07/10/how-to-download-all-of-the-free-ebooks-and-resources-in-my-free-ebooks-giveaway/
+Downloads books from https://blogs.msdn.microsoft.com/mssmallbiz/2016/07/10/free-thats-right-im-giving-away-millions-of-free-microsoft-ebooks-again-including-windows-10-office-365-office-2016-power-bi-azure-windows-8-1-office-2013-sharepoint-2016-sha/
 
 The script allows for download resumption in the situation of an interupted download. This can be problematic if the file itself is changed in between script invocations. This can be remedied by deleting the troubled file.

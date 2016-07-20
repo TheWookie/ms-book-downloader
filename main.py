@@ -4,10 +4,11 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from os import path
+from os import makedirs
 
 download_page = 'https://blogs.msdn.microsoft.com/mssmallbiz/2016/07/10/free-thats-right-im-giving-away-millions-of-free-microsoft-ebooks-again-including-windows-10-office-365-office-2016-power-bi-azure-windows-8-1-office-2013-sharepoint-2016-sha/'
 download_href_host = 'ligman.me'
-download_directory = path.expanduser('~/downloads')
+download_directory = path.expanduser('~/downloads/ms-books')
 
 def __download_file__(url, file):
 	if path.exists(file):
@@ -30,6 +31,7 @@ if __name__ == '__main__':
 	soup = BeautifulSoup(source_html, 'html.parser')
 	links = soup.find_all('a')
 	url_regex = re.compile('.*\\.\\w{3,}')
+	filename_url_map = {}
 	for link in links:
 		current_url = link.get('href')
 		if download_href_host in current_url:
@@ -38,5 +40,9 @@ if __name__ == '__main__':
 				redir_url = response.headers['Location']
 				redir_filename = redir_url.split('/')[-1]
 				if url_regex.match(redir_filename):
-					__download_file__(current_url, path.join(download_directory, redir_filename))
-					
+					# adding strings to map to prevent duplicates.
+					filename_url_map[redir_filename] = redir_url
+					print('Collecting:', redir_filename)
+	makedirs(download_directory, exist_ok=True)
+	for file, url in filename_url_map:
+		__download_file__(url, path.join(download_directory, file))
